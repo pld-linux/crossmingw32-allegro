@@ -14,15 +14,13 @@ Patch2:		%{realname}-opt.patch
 URL:		http://alleg.sourceforge.net/
 BuildRequires:	crossmingw32-dx70
 BuildRequires:	crossmingw32-gcc
+Requires:	crossmingw32-runtime
 BuildRoot:	%{tmpdir}/%{realname}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
 
 %define		target			i386-mingw32
-%define		target_platform 	i386-pc-mingw32
 %define		arch			%{_prefix}/%{target}
-%define		gccarch			%{_prefix}/lib/gcc-lib/%{target}
-%define		gcclib			%{_prefix}/lib/gcc-lib/%{target}/%{version}
 
 %description
 Allegro is a cross-platform library intended for use in computer games
