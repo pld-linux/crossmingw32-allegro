@@ -2,12 +2,12 @@
 Summary:	A game programming library - Ming32 cross version
 Summary(pl):	Biblioteka do programowania gier - wersja skro¶na dla Ming32
 Name:		crossmingw32-%{realname}
-Version:	4.1.12
+Version:	4.1.13
 Release:	1
 License:	Giftware
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/alleg/%{realname}-%{version}.tar.gz
-# Source0-md5:	93c215aab32b086dcfd8a74c1d383abc
+# Source0-md5:	2a96046717cfe2ea6159cf76e11bf622
 Patch0:		%{realname}-info.patch
 Patch1:		%{realname}-examples.patch
 Patch2:		%{realname}-opt.patch
@@ -73,12 +73,14 @@ install -d $RPM_BUILD_ROOT%{arch}/lib
 
 %{__make} install \
 	DEBUGMODE=1 \
+	MKDIR_OPTS="-p" \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
 	MINGDIR=$RPM_BUILD_ROOT%{arch}
 
 %{__make} install \
 	PROFILEMODE=1 \
+	MKDIR_OPTS="-p" \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
 	MINGDIR=$RPM_BUILD_ROOT%{arch}
