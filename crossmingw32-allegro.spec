@@ -1,27 +1,29 @@
+%define		realname	allegro
+Summary:	A game programming library
+Summary(pl):	Biblioteka do programowania gier
+Name:		crossmingw32-%{realname}
+Version:	4.1.9
+Release:	1
+License:	Giftware
+Group:		Libraries
+Source0:	http://dl.sourceforge.net/alleg/%{realname}-%{version}.tar.gz
+Patch0:		%{realname}-info.patch
+Patch1:		%{realname}-examples.patch
+Patch2:		%{realname}-alsa9.patch
+Patch3:		%{realname}-crossmingw32.patch
+Patch4:		%{realname}-opt.patch
+URL:		http://alleg.sourceforge.net/
+BuildRequires:	crossmingw32-dx70
+BuildRequires:	crossmingw32-gcc
+BuildRoot:	%{tmpdir}/%{realname}-%{version}-root-%(id -u -n)
 
-%define		realname		allegro
 %define		no_install_post_strip	1
+
 %define		target			i386-mingw32
 %define		target_platform 	i386-pc-mingw32
 %define		arch			%{_prefix}/%{target}
 %define		gccarch			%{_prefix}/lib/gcc-lib/%{target}
 %define		gcclib			%{_prefix}/lib/gcc-lib/%{target}/%{version}
-
-Summary:	A game programming library
-Summary(pl):	Biblioteka do programowania gier
-Name:		crossmingw32_%{realname}
-Version:	4.1.7
-Release:	1
-License:	Giftware
-Group:		Libraries
-Source0:	http://belnet.dl.sourceforge.net/sourceforge/alleg/%{realname}-%{version}.tar.gz
-Patch0:		%{realname}-info.patch
-Patch1:		%{realname}-examples.patch
-Patch2:		%{realname}-alsa9.patch
-Patch3:		%{realname}-crossmingw32.patch
-URL:		http://alleg.sourceforge.net
-BuildRequires:	crossmingw32-gcc
-BuildRoot:	%{tmpdir}/%{realname}-%{version}-root-%(id -u -n)
 
 %description
 Allegro is a cross-platform library intended for use in computer games
@@ -39,62 +41,56 @@ grach komputerowych i innych rodzajach oprogramowania multimedialnego.
 %patch3 -p1
 
 %build
-
 ./fix.sh mingw32
 
-LDFLAGS="${LDFLAGS}" ; export LDFLAGS
-CFLAGS="${CFLAGS} -I%{arch}/include" ; export CFLAGS
-CXXFLAGS="${CXXFLAGS}" ; export CXXFLAGS
-FFLAGS="${FFLAGS}" ; export FFLAGS
-CPPFLAGS="${CPPFLAGS}" ; export CPPFLAGS
-LIB_PATH="%{_prefix}/lib" ; export LIB_PATH
 CC=%{target}-gcc ; export CC
 CXX=%{target}-g++ ; export CXX
 
-%{__make} \
-	lib \
+%{__make} lib \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
-	MINGDIR=$RPM_BUILD_ROOT/%{arch}
+	MINGDIR=$RPM_BUILD_ROOT%{arch} \
+	TARGET_ARCH="%{rpmcflags}" TARGET_OPTS="-ffast-math"
 
-%{__make} \
-	lib \
+%{__make} lib \
 	DEBUGMODE=1 \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
-	MINGDIR=$RPM_BUILD_ROOT/%{arch}
+	MINGDIR=$RPM_BUILD_ROOT%{arch} \
+	TARGET_ARCH="%{rpmcflags}" TARGET_OPTS="-ffast-math"
 
-%{__make} \
-	lib \
+%{__make} lib \
 	PROFILEMODE=1 \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
-	MINGDIR=$RPM_BUILD_ROOT/%{arch}
+	MINGDIR=$RPM_BUILD_ROOT%{arch} \
+	TARGET_ARCH="%{rpmcflags}" TARGET_OPTS="-ffast-math"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/%{arch}
+install -d $RPM_BUILD_ROOT%{arch}
 %{__make} install \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
-	MINGDIR=$RPM_BUILD_ROOT/%{arch}
+	MINGDIR=$RPM_BUILD_ROOT%{arch}
 
 %{__make} install \
 	DEBUGMODE=1 \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
-	MINGDIR=$RPM_BUILD_ROOT/%{arch}
+	MINGDIR=$RPM_BUILD_ROOT%{arch}
 
 %{__make} install \
 	PROFILEMODE=1 \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
-	MINGDIR=$RPM_BUILD_ROOT/%{arch}
+	MINGDIR=$RPM_BUILD_ROOT%{arch}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{arch}
+%{arch}/include/*
+%{arch}/lib/*
