@@ -2,16 +2,15 @@
 Summary:	A game programming library - Ming32 cross version
 Summary(pl):	Biblioteka do programowania gier - wersja skro¶na dla Ming32
 Name:		crossmingw32-%{realname}
-Version:	4.1.11
+Version:	4.1.12
 Release:	1
 License:	Giftware
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/alleg/%{realname}-%{version}.tar.gz
-# Source0-md5:	61568ff088fd074eaad8b5cc23ac40ff
+# Source0-md5:	93c215aab32b086dcfd8a74c1d383abc
 Patch0:		%{realname}-info.patch
 Patch1:		%{realname}-examples.patch
-Patch2:		%{realname}-alsa9.patch
-Patch3:		%{realname}-opt.patch
+Patch2:		%{realname}-opt.patch
 URL:		http://alleg.sourceforge.net/
 BuildRequires:	crossmingw32-dx70
 BuildRequires:	crossmingw32-gcc
@@ -86,7 +85,7 @@ install -d $RPM_BUILD_ROOT%{arch}/lib
 	CROSSCOMPILE=1 \
 	MINGDIR=$RPM_BUILD_ROOT%{arch}
 
-%{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{arch}/lib/lib*.a
+%{!?debug:%{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{arch}/lib/lib*.a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
