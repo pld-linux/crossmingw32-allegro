@@ -3,7 +3,7 @@ Summary:	A game programming library - Ming32 cross version
 Summary(pl):	Biblioteka do programowania gier - wersja skro¶na dla Ming32
 Name:		crossmingw32-%{realname}
 Version:	4.1.15
-Release:	2
+Release:	3
 License:	Giftware
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/alleg/%{realname}-%{version}.tar.gz
@@ -21,6 +21,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		target			i386-mingw32
 %define		arch			%{_prefix}/%{target}
+
+%ifarch alpha sparc sparc64 sparcv9
+# alpha's -mieee and sparc's -mtune=* are not valid for target's gcc
+%define		optflags	-O2
+%endif
 
 %description
 Allegro is a cross-platform library intended for use in computer games
