@@ -15,7 +15,7 @@ URL:		http://alleg.sourceforge.net/
 BuildRequires:	crossmingw32-dx70
 BuildRequires:	crossmingw32-gcc
 Requires:	crossmingw32-runtime
-BuildRoot:	%{tmpdir}/%{realname}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
 
