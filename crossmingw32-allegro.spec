@@ -2,12 +2,12 @@
 Summary:	A game programming library - Ming32 cross version
 Summary(pl):	Biblioteka do programowania gier - wersja skro¶na dla Ming32
 Name:		crossmingw32-%{realname}
-Version:	4.1.13
+Version:	4.1.14
 Release:	1
 License:	Giftware
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/alleg/%{realname}-%{version}.tar.gz
-# Source0-md5:	2a96046717cfe2ea6159cf76e11bf622
+# Source0-md5:	f91225cfd2429b8f0ba01f026981b681
 Patch0:		%{realname}-info.patch
 Patch1:		%{realname}-examples.patch
 Patch2:		%{realname}-opt.patch
