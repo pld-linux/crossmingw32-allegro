@@ -2,17 +2,16 @@
 Summary:	A game programming library
 Summary(pl):	Biblioteka do programowania gier
 Name:		crossmingw32-%{realname}
-Version:	4.1.9
+Version:	4.1.11
 Release:	1
 License:	Giftware
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/alleg/%{realname}-%{version}.tar.gz
-# Source0-md5:	d4423486f7aed064e10071a19fd06b1e
+# Source0-md5:	61568ff088fd074eaad8b5cc23ac40ff
 Patch0:		%{realname}-info.patch
 Patch1:		%{realname}-examples.patch
 Patch2:		%{realname}-alsa9.patch
-Patch3:		%{realname}-crossmingw32.patch
-Patch4:		%{realname}-opt.patch
+Patch3:		%{realname}-opt.patch
 URL:		http://alleg.sourceforge.net/
 BuildRequires:	crossmingw32-dx70
 BuildRequires:	crossmingw32-gcc
@@ -35,42 +34,41 @@ Allegro jest przeno¶n± bibliotek± przeznaczon± do wykorzystania w
 grach komputerowych i innych rodzajach oprogramowania multimedialnego.
 
 %prep
-%setup  -q -n %{realname}-%{version}
+%setup -q -n %{realname}-%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 ./fix.sh mingw32
 
-CC=%{target}-gcc ; export CC
-CXX=%{target}-g++ ; export CXX
-
 %{__make} lib \
 	NATIVEPATH=$PATH \
-	CROSSCOMPILE=1 \
+	CROSSCOMPILE=1 XPREFIX="%{target}-" \
+	CC="%{target}-gcc" CXX="%{target}-g++" \
 	MINGDIR=$RPM_BUILD_ROOT%{arch} \
 	TARGET_ARCH="%{rpmcflags}" TARGET_OPTS="-ffast-math"
 
 %{__make} lib \
 	DEBUGMODE=1 \
 	NATIVEPATH=$PATH \
-	CROSSCOMPILE=1 \
+	CROSSCOMPILE=1 XPREFIX="%{target}-" \
+	CC="%{target}-gcc" CXX="%{target}-g++" \
 	MINGDIR=$RPM_BUILD_ROOT%{arch} \
 	TARGET_ARCH="%{rpmcflags}" TARGET_OPTS="-ffast-math"
 
 %{__make} lib \
 	PROFILEMODE=1 \
 	NATIVEPATH=$PATH \
-	CROSSCOMPILE=1 \
+	CROSSCOMPILE=1 XPREFIX="%{target}-" \
+	CC="%{target}-gcc" CXX="%{target}-g++" \
 	MINGDIR=$RPM_BUILD_ROOT%{arch} \
 	TARGET_ARCH="%{rpmcflags}" TARGET_OPTS="-ffast-math"
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{arch}/lib
 
-install -d $RPM_BUILD_ROOT%{arch}
 %{__make} install \
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
@@ -87,11 +85,14 @@ install -d $RPM_BUILD_ROOT%{arch}
 	NATIVEPATH=$PATH \
 	CROSSCOMPILE=1 \
 	MINGDIR=$RPM_BUILD_ROOT%{arch}
+
+%{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{arch}/lib/lib*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{arch}/include/*
-%{arch}/lib/*
+%{arch}/include/*.h
+%{arch}/include/allegro
+%{arch}/lib/lib*.a
