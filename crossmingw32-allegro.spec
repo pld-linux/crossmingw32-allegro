@@ -14,6 +14,7 @@ Patch2:		%{realname}-opt.patch
 URL:		http://alleg.sourceforge.net/
 BuildRequires:	crossmingw32-dx70
 BuildRequires:	crossmingw32-gcc
+BuildRequires:	texinfo
 Requires:	crossmingw32-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
