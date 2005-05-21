@@ -11,6 +11,7 @@ Source0:	http://dl.sourceforge.net/alleg/%{realname}-%{version}.tar.gz
 Patch0:		%{realname}-info.patch
 Patch1:		%{realname}-examples.patch
 Patch2:		%{realname}-opt.patch
+Patch3:		%{realname}-asm.patch
 URL:		http://alleg.sourceforge.net/
 BuildRequires:	crossmingw32-dx70
 BuildRequires:	crossmingw32-gcc
@@ -41,6 +42,7 @@ grach komputerowych i innych rodzajach oprogramowania multimedialnego.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 ./fix.sh mingw32
