@@ -1,6 +1,6 @@
 %define		realname	allegro
 Summary:	A game programming library - Ming32 cross version
-Summary(pl.UTF-8):   Biblioteka do programowania gier - wersja skrośna dla Ming32
+Summary(pl.UTF-8):	Biblioteka do programowania gier - wersja skrośna dla Ming32
 Name:		crossmingw32-%{realname}
 Version:	4.2.0
 Release:	1
