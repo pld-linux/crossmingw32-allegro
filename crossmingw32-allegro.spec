@@ -1,6 +1,6 @@
 %define		realname	allegro
 Summary:	A game programming library - Ming32 cross version
-Summary(pl):	Biblioteka do programowania gier - wersja skro¶na dla Ming32
+Summary(pl.UTF-8):   Biblioteka do programowania gier - wersja skroÅ›na dla Ming32
 Name:		crossmingw32-%{realname}
 Version:	4.2.0
 Release:	1
@@ -32,8 +32,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Allegro is a cross-platform library intended for use in computer games
 and other types of multimedia programming.
 
-%description -l pl
-Allegro jest przeno¶n± bibliotek± przeznaczon± do wykorzystania w
+%description -l pl.UTF-8
+Allegro jest przenoÅ›nÄ… bibliotekÄ… przeznaczonÄ… do wykorzystania w
 grach komputerowych i innych rodzajach oprogramowania multimedialnego.
 
 %prep
